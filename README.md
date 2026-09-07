@@ -3,7 +3,7 @@
 
 Probability models for sports results, written in Python.
 
-Football scores and a gamma running-time model for horse racing. A sumo tournament simulation will be added later.
+Football, horse racing, and a sumo-style round robin
 
 ## Football scores
 
@@ -58,5 +58,13 @@ place column is the ground truth under the gamma model; Harville and
 Henery are approximations.
 
 python horse_demo.py
+
+## Round-robin tournament (basho)
+
+Sixteen competitors, Elo win probabilities, ratings frozen, each plays
+the other fifteen once. The title is most wins. A short playoff breaks
+ties so the yusho column sums to 100%.
+
+python basho_demo.py
 - Dixon–Coles only rescales (0,0), (0,1), (1,0), (1,1).
 - A covariance of 0 in the bivariate model turns the common shock off.
