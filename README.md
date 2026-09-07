@@ -3,8 +3,7 @@
 
 Probability models for sports results, written in Python.
 
-This folder starts with football scores. Sumo tournament simulation and a
-gamma running-time model for horse racing will be added later.
+Football scores and a gamma running-time model for horse racing. A sumo tournament simulation will be added later.
 
 ## Football scores
 
@@ -47,5 +46,17 @@ python demo.py
 ### Notes
 
 - The goal grid is truncated at 20. Residual mass above that is negligible for ordinary football means.
+
+## Horse racing
+
+Each horse has an independent Gamma finishing time, fitted from a mean and
+variance. The race is the minimum time. Place is finishing first or second.
+
+Harville builds place probabilities from the win vector only. Henery does
+the same after raising those win probabilities to 0.8. The Monte Carlo
+place column is the ground truth under the gamma model; Harville and
+Henery are approximations.
+
+python horse_demo.py
 - Dixon–Coles only rescales (0,0), (0,1), (1,0), (1,1).
 - A covariance of 0 in the bivariate model turns the common shock off.
