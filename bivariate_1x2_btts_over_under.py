@@ -70,6 +70,11 @@ def biv(muH, muA, cov, line, mg=31):
 # returns the three lists (each has three members)
     return prob, btts, over
 
+def odds(prob, vig):
+    return [round(1/((1+vig)*x),2) for x in prob]
+
+
+
 print('\nBivariate Poisson for Soccer 1x2, btts and over/under\n\nhome mean: ')
 
 muH = get_pos()
@@ -94,14 +99,39 @@ line = get_pos()
 
 prob, btts, over = biv(muH, muA, cov, line)
 
-print('\nhome wins:  ',prob[0],'  \tdraw:',prob[1],'\t\taway wins:',prob[2],'\n')
+print('\nhome wins:',prob[0])
+print('draw:',prob[1])
+print('away wins:',prob[2],'\n')
 
-print('home scores:',btts[0],'  \taway scores:',btts[1],'\tbtts:',btts[2],'\n')
+print('home scores:',btts[0])
+print('away scores:',btts[1])
+print('both score: ',btts[2],'\n')
 
-print('over',line,':',over[0],'\t\tequal',line,':',over[1],end='')
+print('over',line,':',over[0])
+print('equal',line,':',over[1])
+print('under',line,':',over[2],'\n')
 
-# a little cosmetic output formatting for non-integer lines
+print('Apply a uniform overround')
 
-if over[1] == 0.0 : print('\t\t',end='')
+get = input('(?) ')
 
-print('\t\tunder',line,':',over[2],'\n')
+if get=='y' :
+    print('\nenter overround (%)')
+    vig = get_pos()
+    vig/=100
+    oprob = odds(prob, vig)
+    obtts = odds(btts, vig)
+    oover = odds(over, vig)
+
+    print('\nhome wins:',oprob[0])
+    print('draw:',oprob[1])
+    print('away wins:',oprob[2],'\n')
+
+    print('home scores:',obtts[0])
+    print('away scores:',obtts[1])
+    print('both score: ',obtts[2],'\n')
+
+    print('over',line,':',oover[0])
+    print('equal',line,':',oover[1])
+    print('under',line,':',oover[2],'\n')
+
